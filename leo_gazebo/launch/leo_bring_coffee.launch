@@ -1,0 +1,59 @@
+<launch>
+
+   <arg name="fixed" default="false"/>
+   <arg name="robot_ns1" default="robot1"/>
+   <arg name="robot_ns2" default="robot2"/>
+   <arg name="model_name1" default="leo1"/>
+   <arg name="model_name2" default="leo2"/>
+
+   <arg name="x1" default="-2.0"/>
+   <arg name="y1" default="-7.0" />
+   <arg name="z1" default="1.0" />
+   <arg name="R1" default="0.0" />
+   <arg name="P1" default="0.0" />
+   <arg name="Y1" default="0.0" />
+
+   <arg name="x2" default="0.0"/>
+   <arg name="y2" default="-7.0" />
+   <arg name="z2" default="1.0" />
+   <arg name="R2" default="0.0" />
+   <arg name="P2" default="0.0" />
+   <arg name="Y2" default="0.0" />
+
+   <arg name="world_name" default="worlds/empty.world"/>
+   <arg name="paused" default="false"/>
+   <arg name="gui" default="true"/>
+   <arg name="debug" default="false"/>
+   <arg name="verbose" default="false"/>
+
+   <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(arg world_name)"/>
+      <arg name="paused" value="$(arg paused)"/>
+      <arg name="gui" value="$(arg gui)"/>
+      <arg name="debug" value="$(arg debug)"/>
+      <arg name="verbose" value="$(arg verbose)"/>
+   </include>
+
+   <include file="$(find leo_gazebo)/launch/spawn_2_robot.launch">
+      <arg name="robot_ns" value="$(arg robot_ns1)"/>
+      <arg name="model_name" value="$(arg model_name1)"/>
+      <arg name="x" value="$(arg x1)"/>
+      <arg name="y" value="$(arg y1)"/>
+      <arg name="z" value="$(arg z1)"/>
+      <arg name="R" value="$(arg R1)"/>
+      <arg name="P" value="$(arg P1)"/>
+      <arg name="Y" value="$(arg Y1)"/>
+   </include>
+
+
+   <include file="$(find leo_gazebo)/launch/spawn_2_robot.launch">
+      <arg name="robot_ns" value="$(arg robot_ns2)"/>
+       <arg name="model_name" value="$(arg model_name2)"/>
+      <arg name="x" value="$(arg x2)"/>
+      <arg name="y" value="$(arg y2)"/>
+      <arg name="z" value="$(arg z2)"/>
+      <arg name="R" value="$(arg R2)"/>
+      <arg name="P" value="$(arg P2)"/>
+      <arg name="Y" value="$(arg Y2)"/>
+   </include>
+</launch>
