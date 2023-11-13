@@ -8,8 +8,8 @@ controllers:
     type: "diff_drive_controller/DiffDriveController"
 
     # Joint names
-    left_wheel: ['wheel_RL_joint', 'wheel_FL_joint']
-    right_wheel: ['wheel_RR_joint', 'wheel_FR_joint']
+    #left_wheel: ['wheel_FL_joint', 'wheel_FL_joint']
+    #right_wheel: ['wheel_RR_joint', 'wheel_FR_joint']
 
     # Odometry
     publish_rate: 20

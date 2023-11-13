@@ -19,8 +19,15 @@
    <arg name="R2" default="0.0" />
    <arg name="P2" default="0.0" />
    <arg name="Y2" default="0.0" />
+   
+   <arg name="robot1_left_wheel" default="[robot1_wheel_RL_joint, robot1_wheel_FL_joint]" />
+   <arg name="robot1_right_wheel" default="[robot1_wheel_RR_joint, robot1_wheel_FR_joint]" />
+   <arg name="robot2_left_wheel" default="[robot2_wheel_RL_joint, robot2_wheel_FL_joint]" />
+   <arg name="robot2_right_wheel" default="[robot2_wheel_RR_joint, robot2_wheel_FR_joint]" />
 
-   <arg name="world_name" default="worlds/empty.world"/>
+   <arg name="world_name" value="$(find leo_gazebo_worlds)/worlds/leo_bring_coffee.world" />
+   <arg name="map_file" value="$(find leoplanner)/map/rviz_maps/map_2_robots.yaml" />
+   
    <arg name="paused" default="false"/>
    <arg name="gui" default="true"/>
    <arg name="debug" default="false"/>
@@ -33,8 +40,12 @@
       <arg name="debug" value="$(arg debug)"/>
       <arg name="verbose" value="$(arg verbose)"/>
    </include>
+   
+   <include file="$(find leo_navigation)/launch/map_server.launch">
+      <arg name="map_file" value="$(arg map_file)"/>
+   </include>
 
-   <include file="$(find leo_gazebo)/launch/spawn_2_robot.launch">
+   <include file="$(find leo_gazebo)/launch/spawn_robot.launch">
       <arg name="robot_ns" value="$(arg robot_ns1)"/>
       <arg name="model_name" value="$(arg model_name1)"/>
       <arg name="x" value="$(arg x1)"/>
@@ -43,10 +54,11 @@
       <arg name="R" value="$(arg R1)"/>
       <arg name="P" value="$(arg P1)"/>
       <arg name="Y" value="$(arg Y1)"/>
+      <arg name="left_wheel" value="$(arg robot1_left_wheel)"/>
+      <arg name="right_wheel" value="$(arg robot1_right_wheel)"/>
    </include>
 
-
-   <include file="$(find leo_gazebo)/launch/spawn_2_robot.launch">
+   <include file="$(find leo_gazebo)/launch/spawn_robot.launch">
       <arg name="robot_ns" value="$(arg robot_ns2)"/>
        <arg name="model_name" value="$(arg model_name2)"/>
       <arg name="x" value="$(arg x2)"/>
@@ -55,5 +67,7 @@
       <arg name="R" value="$(arg R2)"/>
       <arg name="P" value="$(arg P2)"/>
       <arg name="Y" value="$(arg Y2)"/>
+      <arg name="left_wheel" value="$(arg robot2_left_wheel)"/>
+      <arg name="right_wheel" value="$(arg robot2_right_wheel)"/>
    </include>
 </launch>
